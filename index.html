@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مفاجأة لمحمد 🎉</title>
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      background: linear-gradient(135deg, #ffe6e6, #ffe0cc);
+      text-align: center;
+      padding: 40px;
+      color: #4d194d;
+    }
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      max-width: 600px;
+      margin: auto;
+    }
+    button {
+      background-color: #ff85a2;
+      border: none;
+      color: white;
+      padding: 15px 25px;
+      font-size: 18px;
+      border-radius: 15px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #ff5c8a;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 20px;
+      min-height: 100px;
+    }
+    .heart {
+      font-size: 50px;
+      color: red;
+      animation: beat 0.8s infinite;
+    }
+    @keyframes beat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎂 مفاجأة عيد ميلادك يا محمد 🎉</h1>
+    <p>من فاطمة الزهراء ❤️</p>
+    <button onclick="nextStep()">اضغط هنا</button>
+    <div class="message" id="message"></div>
+  </div>  <script>
+    const messages = [
+      "الساعة دقت 00:00 🎉… يعني حان الوقت نفرح بولادة أمير الطيبة محمد ❤️",
+      "🎈 هل تعرف أنك دخلت عالم البالغين؟ لا تقلق… مازلت نحبك وانت صغيري 😄",
+      "❤️ هذه قلب ينبض فقط لما يشوف اسمك… <div class='heart'>❤</div>",
+      "❓ سؤال بسيط: متى أول مرة قلتلي فيها (ضحكتك حلوة)؟ 🤔",
+      "😆 سؤال سهل: لو كنت أكلة، وش راح تكون؟ (أنا نقول: شوكولا ساخنة بالفلفل!)",
+      "😜 معلومة حصرية: محمد أكثر واحد يعرف كيف يربح قلبي، لكن للأسف ما يعرفش يخسر فالنقاشات!",
+      "🤍 من جد، كل سنة وانت الخير، وانت النور اللي يكبر معي عام بعد عام…",
+      "🎁 المفاجأة الحقيقية؟ أنك مهما كبرت، تبقى ديمًا سبب الابتسامة اللي ما تغيبش عني.",
+      "🎊 ختامها مسك: كل سنة وانت بخير، يا محمد… من فاطمة الزهراء اللي تحبك بدون شروط ❤️"
+    ];
+
+    let step = 0;
+    function nextStep() {
+      if (step < messages.length) {
+        document.getElementById("message").innerHTML = messages[step];
+        step++;
+      } else {
+        document.getElementById("message").innerHTML = "انتهت اللعبة 🎉 لكن الحب ما ينتهيش أبدًا!";
+      }
+    }
+  </script></body>
+</html>
