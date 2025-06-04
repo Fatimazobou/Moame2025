@@ -1,82 +1,94 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مفاجأة لمحمد 🎉</title>
+  <title>عيد ميلاد محمد 🎉</title>
   <style>
     body {
-      font-family: 'Tahoma', sans-serif;
-      background: linear-gradient(135deg, #ffe6e6, #ffe0cc);
+      font-family: 'Cairo', sans-serif;
+      background-color: #e0f0ff;
+      color: #003366;
       text-align: center;
-      padding: 40px;
-      color: #4d194d;
+      padding: 20px;
     }
-    .container {
-      background: #fff;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      max-width: 600px;
-      margin: auto;
+    h1 {
+      color: #005b99;
+    }
+    .question {
+      font-size: 20px;
+      margin: 20px 0;
     }
     button {
-      background-color: #ff85a2;
-      border: none;
-      color: white;
-      padding: 15px 25px;
+      padding: 10px 20px;
+      margin: 10px;
       font-size: 18px;
-      border-radius: 15px;
+      border: none;
+      border-radius: 10px;
+      background-color: #0077cc;
+      color: white;
       cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+    .result {
+      font-size: 24px;
       margin-top: 20px;
-      transition: 0.3s;
-    }
-    button:hover {
-      background-color: #ff5c8a;
-    }
-    .message {
-      margin-top: 20px;
-      font-size: 20px;
-      min-height: 100px;
-    }
-    .heart {
-      font-size: 50px;
-      color: red;
-      animation: beat 0.8s infinite;
-    }
-    @keyframes beat {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
+      color: green;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🎂 مفاجأة عيد ميلادك يا محمد 🎉</h1>
-    <p>من فاطمة الزهراء ❤️</p>
-    <button onclick="nextStep()">اضغط هنا</button>
-    <div class="message" id="message"></div>
-  </div>  <script>
-    const messages = [
-      "الساعة دقت 00:00 🎉… يعني حان الوقت نفرح بولادة أمير الطيبة محمد ❤️",
-      "🎈 هل تعرف أنك دخلت عالم البالغين؟ لا تقلق… مازلت نحبك وانت صغيري 😄",
-      "❤️ هذه قلب ينبض فقط لما يشوف اسمك… <div class='heart'>❤</div>",
-      "❓ سؤال بسيط: متى أول مرة قلتلي فيها (ضحكتك حلوة)؟ 🤔",
-      "😆 سؤال سهل: لو كنت أكلة، وش راح تكون؟ (أنا نقول: شوكولا ساخنة بالفلفل!)",
-      "😜 معلومة حصرية: محمد أكثر واحد يعرف كيف يربح قلبي، لكن للأسف ما يعرفش يخسر فالنقاشات!",
-      "🤍 من جد، كل سنة وانت الخير، وانت النور اللي يكبر معي عام بعد عام…",
-      "🎁 المفاجأة الحقيقية؟ أنك مهما كبرت، تبقى ديمًا سبب الابتسامة اللي ما تغيبش عني.",
-      "🎊 ختامها مسك: كل سنة وانت بخير، يا محمد… من فاطمة الزهراء اللي تحبك بدون شروط ❤️"
+  <h1>💙 عيد ميلاد سعيد يا محمد 💙</h1>
+  <p>جاهز للعبة الحب؟ 😍 جاوب على الأسئلة وشوف كم تحبني 😘</p>  <div id="quiz">
+    <div id="question-container" class="question"></div>
+    <button onclick="answer(true)">✅ صحيح</button>
+    <button onclick="answer(false)">❌ خطأ</button>
+    <p id="progress"></p>
+  </div>  <div id="result" class="result hidden"></div>  <audio controls autoplay loop>
+    <source src="https://github.com/SalmaKass/happy-birthday-no-music/raw/main/hbd.mp3" type="audio/mpeg">
+    متصفحك لا يدعم تشغيل الصوت.
+  </audio>  <script>
+    const questions = [
+      { q: "عيد ميلادك يصادف يوم الجمعة 🎉؟", a: true },
+      { q: "أنا نحب اللون الأحمر أكثر من الأزرق؟", a: false },
+      { q: "أول مرة درنا ڤول على بعض كانت صدفة؟", a: true },
+      { q: "العشاق ما يتخاصموش أبدًا؟", a: false },
+      { q: "محمد يحب النكت أكثر من الشكولاطة؟", a: true },
+      { q: "أنت دايمًا تتذكر المناسبات؟", a: true },
+      { q: "أنا ننسى عيد ميلادي؟", a: false },
+      { q: "الحب بلا ثقة يمشي؟", a: false },
+      { q: "لو قلتلك نحبك مليون مرة... راح تمل؟", a: false },
+      { q: "أول مرة قلتلي صباح الخير حسيت بفرحة؟", a: true },
+      { q: "العيد معاك كان يكون أحلى لو كنا مع بعض؟", a: true },
+      { q: "أنا نغار عليك شوية برك؟", a: false },
+      { q: "لو قلتلك أعمللي مفاجأة، راح تفشل؟", a: false },
+      { q: "العشاق ما يلعبوش كويز؟", a: false },
+      { q: "أنا نحب محمد حتى في النكت التافهة؟ 😂", a: true }
     ];
 
-    let step = 0;
-    function nextStep() {
-      if (step < messages.length) {
-        document.getElementById("message").innerHTML = messages[step];
-        step++;
+    let current = 0;
+    let score = 0;
+
+    function showQuestion() {
+      if (current < questions.length) {
+        document.getElementById("question-container").innerText = questions[current].q;
+        document.getElementById("progress").innerText = `السؤال ${current + 1} من ${questions.length}`;
       } else {
-        document.getElementById("message").innerHTML = "انتهت اللعبة 🎉 لكن الحب ما ينتهيش أبدًا!";
+        document.getElementById("quiz").classList.add("hidden");
+        document.getElementById("result").classList.remove("hidden");
+        document.getElementById("result").innerHTML = `🥳 نتيجتك: ${score}/${questions.length}<br><br>🎂 عيد ميلاد سعيد يا محمد 🎂<br>💙 نحبك يا محمد 💙<br><br>ضحكتك عندي بالدنيا كلها 😊`;
       }
     }
+
+    function answer(response) {
+      if (response === questions[current].a) {
+        score++;
+      }
+      current++;
+      showQuestion();
+    }
+
+    showQuestion();
   </script></body>
 </html>
