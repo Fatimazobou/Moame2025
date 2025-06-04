@@ -1,137 +1,124 @@
-<!DOCTYPE html>
-<html lang="ar">
+<!DOCTYPE html><html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>عيد ميلاد سعيد محمد 🎉</title>
+  <title>🎉 هدية لمحمد 🎉</title>
   <style>
     body {
-      background-color: #e0f0ff;
       font-family: 'Arial', sans-serif;
+      background: linear-gradient(#e0f7fa, #b3e5fc);
+      color: #01579b;
       text-align: center;
-      color: #003366;
       padding: 20px;
     }
-    .container {
-      display: none;
-      margin-top: 20px;
+    h1 {
+      color: #0277bd;
     }
     .question {
-      font-size: 20px;
-      margin-bottom: 10px;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 20px;
+      background-color: #ffffffcc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
     }
-    .options button {
-      display: block;
-      margin: 10px auto;
+    button {
+      background-color: #0288d1;
+      color: white;
       padding: 10px 20px;
-      background-color: #007acc;
-      color: white;
+      margin: 10px;
       border: none;
-      border-radius: 10px;
+      border-radius: 20px;
       cursor: pointer;
-      width: 80%;
+      font-size: 16px;
     }
-    .options button:hover {
-      background-color: #005f99;
+    button:hover {
+      background-color: #0277bd;
     }
-    .result {
-      font-size: 24px;
-      margin-top: 20px;
-      font-weight: bold;
-      color: #006699;
-    }
-    .start-btn {
-      background-color: #004d80;
-      color: white;
-      padding: 15px 30px;
-      font-size: 20px;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-    }
-    .start-btn:hover {
-      background-color: #003366;
-    }
-    audio {
+    .hidden {
       display: none;
+    }
+    #progress {
+      height: 20px;
+      background-color: #b3e5fc;
+      margin-top: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #0288d1;
+      transition: width 0.3s;
     }
   </style>
 </head>
-<body>
-
-  <h1>🎂 مفاجأة عيد ميلاد محمد 🎂</h1>
-  <p>من عند فطومة الزهراء 💙</p>
-  <button class="start-btn" onclick="startGame()">ابدأ الهدية 🎁</button>
-
-  <audio id="bgMusic" autoplay loop>
-    <source src="https://cdn.pixabay.com/audio/2022/07/30/audio_3f62c715c5.mp3" type="audio/mpeg">
-  </audio>
-
-  <div class="container" id="gameContainer">
-    <div class="question" id="question"></div>
-    <div class="options" id="options"></div>
-    <div id="progress"></div>
-    <div class="result" id="result"></div>
+<body><h1>🎁 مفاجأة عيد ميلاد محمد 🎁</h1>
+<button onclick="startGame()">🎉 ابدأ الهدية 🎉</button><div id="game" class="hidden">
+  <div id="question-container" class="question"></div>
+  <div id="answers"></div>
+  <div id="progress">
+    <div id="progress-bar"></div>
   </div>
+</div><div id="end-message" class="hidden">
+  <h2>🎂 عيد ميلاد سعيد محمد! 🎂</h2>
+  <p>🎈 عمرك اليوم 21 سنة، ولكن في قلبي من زمان كبير! 🎈</p>
+  <p>💙 أحبك يا فاروقي، وكل عام وأنت سندي وفرحي 💙</p>
+  <p>هدية فطومة، من القلب ❤️</p>
+</div><audio id="music" preload="auto">
+  <source src="https://github.com/yourusername/musicrepo/raw/main/happy-birthday.mp3" type="audio/mpeg">
+</audio><script>
+const questions = [
+  { q: "ما هو لون محمد المفضل؟", options: ["الأزرق", "الأحمر", "الأخضر"], answer: "الأزرق" },
+  { q: "كم عمر محمد اليوم؟", options: ["20", "21", "22"], answer: "21" },
+  { q: "من هي فطومة؟", options: ["جارته؟", "حبيبته؟", "مديرته؟"], answer: "حبيبته؟" },
+  { q: "في أي يوم يصادف عيد ميلاده هذا العام؟", options: ["الجمعة", "السبت", "الأحد"], answer: "الجمعة" },
+  { q: "ماذا تقول له فطومة اليوم؟", options: ["كل عام وأنت بخير", "روح من هنا", "زيد كبر"] , answer: "كل عام وأنت بخير" },
+  { q: "أين تراه فطومة في المستقبل؟", options: ["في قلبي دايمًا", "في باريس", "في المترو"], answer: "في قلبي دايمًا" },
+  { q: "ما اسم محمد الكامل؟", options: ["محمد بن فطومة", "محمد فاروق", "محمد شاروخان"], answer: "محمد فاروق" },
+  { q: "ماذا تحب فيه فطومة؟", options: ["كل شيء", "ضحكته", "صوته"], answer: "كل شيء" },
+  { q: "من أرسل له هذه اللعبة؟", options: ["فطومة", "أخته", "قوقل"] , answer: "فطومة" },
+  { q: "ما الهدية الحقيقية؟", options: ["اللعبة", "الكلام", "الحب"], answer: "الحب" },
+];
 
-  <script>
-    const questions = [
-      { q: "في أي يوم وُلد محمد؟", options: ["عيد الأضحى", "عيد الفطر", "يوم دراسته"], correct: 0 },
-      { q: "ما لون محمد المفضل؟", options: ["أخضر", "أزرق", "أحمر"], correct: 1 },
-      { q: "كم عمر محمد الآن؟", options: ["20", "21", "22"], correct: 1 },
-      { q: "أكمل: محمد و ____", options: ["زهرة", "فطومة", "نجمة"], correct: 1 },
-      { q: "أقرب شيء لقلب محمد؟", options: ["البيتزا", "فطومة", "النوم"], correct: 1 },
-      { q: "ما هو الحيوان المفضل لمحمد؟", options: ["قط", "كلب", "أسد"], correct: 2 },
-      { q: "هل محمد يحب المفاجآت؟", options: ["نعم", "لا", "يخاف"], correct: 0 },
-      { q: "عيد ميلاد بدون فطومة هو؟", options: ["ممل", "عادي", "احتفال"], correct: 0 },
-      { q: "نكتة: لماذا الكمبيوتر بردان؟", options: ["لأنه في ثلاجة", "لأن فيه نوافذ", "لأنه مريض"], correct: 1 },
-      { q: "ما الشيء الذي لا يأكله محمد أبداً؟", options: ["فطائر", "بيض", "فطومة"], correct: 2 },
-      { q: "أين يحب محمد أن يذهب؟", options: ["القمر", "شاطئ", "قلب فطومة"], correct: 2 },
-      { q: "أكمل: فطومة هي ____", options: ["أخته", "روحه", "جارته"], correct: 1 },
-      { q: "كم مرة تقول فطومة لمحمد \"نحبك\" في اليوم؟", options: ["1", "100", "ما تحسبش"], correct: 2 },
-      { q: "هل محمد ذكي؟", options: ["جداً", "شوية", "يحتاج قهوة"], correct: 0 },
-      { q: "ماذا تقول فطومة الآن؟", options: ["كل عام وأنت بخير", "أحبك", "كلاهما"], correct: 2 }
-    ];
+let current = 0;
+let score = 0;
 
-    let currentQuestion = 0;
-    let score = 0;
+function startGame() {
+  document.querySelector('button').classList.add('hidden');
+  document.getElementById('game').classList.remove('hidden');
+  document.getElementById('music').play();
+  showQuestion();
+}
 
-    function startGame() {
-      document.querySelector(".start-btn").style.display = "none";
-      document.getElementById("gameContainer").style.display = "block";
-      document.getElementById("bgMusic").play();
-      showQuestion();
-    }
+function showQuestion() {
+  let q = questions[current];
+  document.getElementById('question-container').innerText = q.q;
+  document.getElementById('answers').innerHTML = '';
+  q.options.forEach(opt => {
+    let btn = document.createElement('button');
+    btn.innerText = opt;
+    btn.onclick = () => checkAnswer(opt);
+    document.getElementById('answers').appendChild(btn);
+  });
+  updateProgress();
+}
 
-    function showQuestion() {
-      const q = questions[currentQuestion];
-      document.getElementById("question").textContent = q.q;
-      document.getElementById("options").innerHTML = "";
-      q.options.forEach((opt, i) => {
-        const btn = document.createElement("button");
-        btn.textContent = opt;
-        btn.onclick = () => checkAnswer(i);
-        document.getElementById("options").appendChild(btn);
-      });
-      document.getElementById("progress").textContent = `السؤال ${currentQuestion + 1} من ${questions.length}`;
-    }
+function checkAnswer(opt) {
+  if (opt === questions[current].answer) score++;
+  current++;
+  if (current < questions.length) showQuestion();
+  else endGame();
+}
 
-    function checkAnswer(i) {
-      if (i === questions[currentQuestion].correct) score++;
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        showQuestion();
-      } else {
-        showResult();
-      }
-    }
+function updateProgress() {
+  let percent = ((current) / questions.length) * 100;
+  document.getElementById('progress-bar').style.width = percent + '%';
+}
 
-    function showResult() {
-      document.getElementById("question").textContent = "";
-      document.getElementById("options").innerHTML = "";
-      document.getElementById("progress").textContent = "";
-      document.getElementById("result").innerHTML =
-        `🥳 محمد، جبت ${score} من ${questions.length}<br><br>🎉 عيد ميلاد سعيد 🎂<br>💖 نحبك بزاف، فطومة الزهراء 💌`;
-    }
-  </script>
-</body>
+function endGame() {
+  document.getElementById('game').classList.add('hidden');
+  document.getElementById('end-message').classList.remove('hidden');
+  document.getElementById('end-message').innerHTML += `<p>علامتك: ${score} / ${questions.length}</p>`;
+}
+</script></body>
 </html>
