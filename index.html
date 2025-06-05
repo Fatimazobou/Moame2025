@@ -5,48 +5,61 @@
   <title>عيد ميلاد سعيد محمد 🎉</title>
   <style>
     body {
-      background: linear-gradient(to bottom, #cce7ff, #e6f2ff);
+      background: linear-gradient(to bottom, #e6f2ff, #ffffff);
       font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
       text-align: center;
+      background-image: url('https://www.transparenttextures.com/patterns/balloons.png');
     }
 
-    img {
+    .photo-circle {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 30px auto 10px;
+      border: 5px solid #66ccff;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .photo-circle img {
       width: 100%;
-      max-height: 300px;
+      height: 100%;
       object-fit: cover;
     }
 
     header {
-      background-color: #007acc;
+      background-color: #0099cc;
       color: white;
-      padding: 15px;
-      font-size: 2em;
+      padding: 20px;
+      font-size: 2.5em;
+      font-weight: bold;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     .progress {
       margin: 15px auto;
-      font-size: 1.2em;
-      color: #003d66;
+      font-size: 1.4em;
+      color: #004466;
     }
 
     .question-box {
-      background-color: #e0f0ff;
+      background-color: rgba(255, 255, 255, 0.9);
       margin: 20px auto;
-      padding: 25px;
-      border-radius: 15px;
+      padding: 30px;
+      border-radius: 20px;
       width: 90%;
-      max-width: 600px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      font-size: 1.5em;
+      max-width: 700px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      font-size: 1.6em;
     }
 
     .options label {
       display: block;
-      background: white;
-      margin: 10px auto;
-      padding: 10px;
+      background: #f0faff;
+      margin: 12px auto;
+      padding: 12px;
       border-radius: 10px;
       width: 90%;
       cursor: pointer;
@@ -60,16 +73,35 @@
     }
 
     .result {
-      font-size: 1.4em;
+      font-size: 1.6em;
       color: #004466;
-      margin: 30px;
+      margin: 40px auto;
+      background-color: #ffffffdd;
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
+    .decor {
+      font-size: 2em;
+      color: #ff6699;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
   </style>
 </head>
 <body>
-  <img src="IMG_٢٠٢٥٠٦٠٥_٢٢٠٠٠٨.jpg" alt="محمد">
   <header>🎂 عيد ميلاد سعيد محمد 🎂</header>
+  <div class="photo-circle">
+    <img src="IMG_٢٠٢٥٠٦٠٥_٢٢٠٠٠٨.jpg" alt="محمد">
+  </div>
+  <div class="decor">🎈🎉💖🌟</div>
   <div class="progress" id="progress">السؤال 1 من 20</div>
   <div class="question-box" id="question-box"></div>
   <div class="result" id="result"></div>
@@ -123,7 +155,7 @@
       const correct = questions[current].correct;
       const labels = document.querySelectorAll(".options label");
       labels.forEach((label, i) => {
-        label.style.backgroundColor = i === correct ? '#b2f2bb' : (i === index ? '#ffcccc' : 'white');
+        label.style.backgroundColor = i === correct ? '#b2f2bb' : (i === index ? '#ffcccc' : '#f0faff');
         label.onclick = null;
       });
       if (index === correct) score++;
