@@ -9,55 +9,154 @@
       font-family: 'Tahoma', sans-serif;
       text-align: center;
       direction: rtl;
-      padding: 0;
       margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow: hidden;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .container {
-      max-width: 600px;
-      margin: auto;
-      padding: 20px;
+      position: relative;
+      width: 90%;
+      max-width: 850px;
       background-color: white;
-      border-radius: 20px;
-      box-shadow: 0 0 15px #90caf9;
-      margin-top: 20px;
+      padding: 30px 25px;
+      border-radius: 40px;
+      box-shadow: 0 8px 25px rgba(33, 150, 243, 0.3);
+      margin: 40px auto;
+      min-height: 600px;
+      animation: fadeIn 1.5s ease-in;
+      z-index: 2;
     }
+
     img {
-      width: 150px;
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
       border-radius: 50%;
-      margin-bottom: 15px;
+      border: 4px solid #2196f3;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
+
+    h1 {
+      color: #0d47a1;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #444;
+    }
+
     button {
       background-color: #2196f3;
       color: white;
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 12px 25px;
+      font-size: 18px;
       margin: 10px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s ease;
     }
+
     button:hover {
       background-color: #1976d2;
     }
-    .hidden { display: none; }
+
+    .hidden {
+      display: none;
+    }
+
     .question-count {
       font-weight: bold;
       color: #1565c0;
+      font-size: 20px;
+      margin-bottom: 10px;
     }
+
     #options button {
       display: block;
-      width: 100%;
-      margin: 10px auto;
+      width: 90%;
+      margin: 8px auto;
     }
+
     .result {
       margin-top: 10px;
       font-size: 18px;
       color: #333;
     }
+
+    #end h2 {
+      color: #2e7d32;
+    }
+
+    /* القلوب */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      transform: rotate(45deg);
+      animation: floatUp 6s infinite ease-in;
+      opacity: 0.7;
+      z-index: 1;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1) rotate(45deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.5) rotate(45deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
+
+<!-- قلوب تطلع -->
+<script>
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (4 + Math.random() * 2) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+
+  setInterval(createHeart, 500);
+</script>
 
 <div class="container">
   <img src="IMG_٢٠٢٥٠٦٠٥_٢٢٠٠٠٨.jpg" alt="صورة محمد">
@@ -82,106 +181,26 @@
 
 <script>
 const questions = [
-  {
-    question: "ما هو الشيء الذي لا يستطيع العاشق إخفاءه؟",
-    options: ["الغيرة", "الابتسامة", "الحب", "الدموع"],
-    answer: "الحب"
-  },
-  {
-    question: "ما هو أكثر شيء يجعل العلاقة أقوى؟",
-    options: ["الهدايا", "المال", "الصدق", "السفر"],
-    answer: "الصدق"
-  },
-  {
-    question: "إذا قلتلك أحبك، ماذا تقول؟",
-    options: ["أنا أكثر", "أنا أحبك أكثر", "أنا أذوب", "ولا كلمة"],
-    answer: "أنا أحبك أكثر"
-  },
-  {
-    question: "أين يلتقي العشاق بدون ميعاد؟",
-    options: ["في الحلم", "في الحقيقة", "في القلب", "في السوق"],
-    answer: "في القلب"
-  },
-  {
-    question: "أكثر شيء يزعج فطومة لما محمد يفعله؟",
-    options: ["ينسى الرسائل", "ما يضحكش", "ما يردش", "ما يقولش صباح الخير"],
-    answer: "ما يردش"
-  },
-  {
-    question: "ما هو الحلم المشترك بيننا؟",
-    options: ["السفر", "الزواج", "بيت صغير", "العيش سوا"],
-    answer: "العيش سوا"
-  },
-  {
-    question: "كم مرة قلتلك نحبك؟",
-    options: ["100", "ألف", "مليون", "لا تحصى"],
-    answer: "لا تحصى"
-  },
-  {
-    question: "أول كلمة خطرتلك كي شفتني؟",
-    options: ["ملاك", "جميلة", "روحي", "غريبة"],
-    answer: "روحي"
-  },
-  {
-    question: "من فينا أكثر رومنسية؟",
-    options: ["محمد", "فطومة", "الاثنين", "ما نعرفش"],
-    answer: "فطومة"
-  },
-  {
-    question: "هل الحب يُقاس بالكلمات؟",
-    options: ["لا", "أحيانا", "نعم", "بالأفعال فقط"],
-    answer: "لا"
-  },
-  {
-    question: "أين يكون الحب الحقيقي؟",
-    options: ["في العقل", "في القلب", "في الخيال", "في الوقت"],
-    answer: "في القلب"
-  },
-  {
-    question: "هل أشتاق لك الآن؟",
-    options: ["أكيد", "ربما", "ما نظنش", "لا"],
-    answer: "أكيد"
-  },
-  {
-    question: "هل أحلامنا رح تتحقق؟",
-    options: ["نعم", "ان شاء الله", "أكيد", "بالصبر"],
-    answer: "أكيد"
-  },
-  {
-    question: "أكثر حاجة نحبها فيك؟",
-    options: ["عيونك", "ضحكتك", "صراحتك", "كلك"],
-    answer: "كلك"
-  },
-  {
-    question: "هل الحب لعبة؟",
-    options: ["لا", "أحيانا", "نعم", "نعم بس حلوة"],
-    answer: "لا"
-  },
-  {
-    question: "نقطة ضعف العشاق؟",
-    options: ["الفراق", "الخيانة", "الغيرة", "الشوق"],
-    answer: "الفراق"
-  },
-  {
-    question: "أين أهرب لما أشتاقلك؟",
-    options: ["صورتك", "ذاكرتي", "قلبي", "رسائلك"],
-    answer: "رسائلك"
-  },
-  {
-    question: "كيف أعبّر لك عن الحب؟",
-    options: ["بالكلام", "بالأفعال", "بالرسائل", "كل هذا"],
-    answer: "كل هذا"
-  },
-  {
-    question: "شو يعني محمد عندي؟",
-    options: ["حب", "حياة", "هوائي", "كل شيء"],
-    answer: "كل شيء"
-  },
-  {
-    question: "هل الحب أقوى من الوقت؟",
-    options: ["أكيد", "لا", "ربما", "إذا صبرنا"],
-    answer: "أكيد"
-  }
+  {question: "ما هو الشيء الذي لا يستطيع العاشق إخفاءه؟", options: ["الغيرة", "الابتسامة", "الحب", "الدموع"], answer: "الحب"},
+  {question: "ما هو أكثر شيء يجعل العلاقة أقوى؟", options: ["الهدايا", "المال", "الصدق", "السفر"], answer: "الصدق"},
+  {question: "إذا قلتلك أحبك، ماذا تقول؟", options: ["أنا أكثر", "أنا أحبك أكثر", "أنا أذوب", "ولا كلمة"], answer: "أنا أحبك أكثر"},
+  {question: "أين يلتقي العشاق بدون ميعاد؟", options: ["في الحلم", "في الحقيقة", "في القلب", "في السوق"], answer: "في القلب"},
+  {question: "أكثر شيء يزعج فطومة لما محمد يفعله؟", options: ["ينسى الرسائل", "ما يضحكش", "ما يردش", "ما يقولش صباح الخير"], answer: "ما يردش"},
+  {question: "ما هو الحلم المشترك بيننا؟", options: ["السفر", "الزواج", "بيت صغير", "العيش سوا"], answer: "العيش سوا"},
+  {question: "كم مرة قلتلك نحبك؟", options: ["100", "ألف", "مليون", "لا تحصى"], answer: "لا تحصى"},
+  {question: "أول كلمة خطرتلك كي شفتني؟", options: ["ملاك", "جميلة", "روحي", "غريبة"], answer: "روحي"},
+  {question: "من فينا أكثر رومنسية؟", options: ["محمد", "فطومة", "الاثنين", "ما نعرفش"], answer: "فطومة"},
+  {question: "هل الحب يُقاس بالكلمات؟", options: ["لا", "أحيانا", "نعم", "بالأفعال فقط"], answer: "لا"},
+  {question: "أين يكون الحب الحقيقي؟", options: ["في العقل", "في القلب", "في الخيال", "في الوقت"], answer: "في القلب"},
+  {question: "هل أشتاق لك الآن؟", options: ["أكيد", "ربما", "ما نظنش", "لا"], answer: "أكيد"},
+  {question: "هل أحلامنا رح تتحقق؟", options: ["نعم", "ان شاء الله", "أكيد", "بالصبر"], answer: "أكيد"},
+  {question: "أكثر حاجة نحبها فيك؟", options: ["عيونك", "ضحكتك", "صراحتك", "كلك"], answer: "كلك"},
+  {question: "هل الحب لعبة؟", options: ["لا", "أحيانا", "نعم", "نعم بس حلوة"], answer: "لا"},
+  {question: "نقطة ضعف العشاق؟", options: ["الفراق", "الخيانة", "الغيرة", "الشوق"], answer: "الفراق"},
+  {question: "أين أهرب لما أشتاقلك؟", options: ["صورتك", "ذاكرتي", "قلبي", "رسائلك"], answer: "رسائلك"},
+  {question: "كيف أعبّر لك عن الحب؟", options: ["بالكلام", "بالأفعال", "بالرسائل", "كل هذا"], answer: "كل هذا"},
+  {question: "شو يعني محمد عندي؟", options: ["حب", "حياة", "هوائي", "كل شيء"], answer: "كل شيء"},
+  {question: "هل الحب أقوى من الوقت؟", options: ["أكيد", "لا", "ربما", "إذا صبرنا"], answer: "أكيد"}
 ];
 
 let current = 0, score = 0;
@@ -233,4 +252,4 @@ function endQuiz() {
 </script>
 
 </body>
-</html>
+  </html>
