@@ -1,218 +1,151 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>اختبار الحب - عيد ميلاد سعيد</title>
-<style>
-  body {
-    font-family: 'Arial', sans-serif;
-    background: radial-gradient(circle, #001f3f 0%, #000814 100%);
-    color: #00aaff;
-    margin: 0; padding: 0;
-    display: flex; justify-content: center; align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    direction: rtl;
-  }
-  .container {
-    background: #001f3fdd;
-    border-radius: 15px;
-    width: 95vw;
-    max-width: 600px;
-    padding: 20px 25px;
-    box-shadow: 0 0 25px #00aaffaa;
-    text-align: center;
-    position: relative;
-  }
-  img {
-    max-width: 150px;
-    border-radius: 50%;
-    margin-bottom: 15px;
-    box-shadow: 0 0 15px #00aaffcc;
-  }
-  h1 {
-    font-size: 1.6rem;
-    margin-bottom: 15px;
-    color: #00aaff;
-    text-shadow: 0 0 10px #00aaff;
-  }
-  #progress {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    color: #00ccff;
-  }
-  #question {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    min-height: 60px;
-  }
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  button.option-btn {
-    background: #005f99;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 10px;
-    color: #aaffff;
-    font-size: 1.1rem;
-    cursor: pointer;
-    box-shadow: 0 0 15px #0077cc99;
-    transition: background 0.3s ease;
-  }
-  button.option-btn:hover {
-    background: #0088cc;
-  }
-  button.option-btn.correct {
-    background: #00cc44;
-    box-shadow: 0 0 20px #00ff77;
-    color: #001f0f;
-    font-weight: bold;
-  }
-  button.option-btn.wrong {
-    background: #cc0000;
-    box-shadow: 0 0 20px #ff4444;
-    color: #fff;
-    font-weight: bold;
-  }
-  #score {
-    font-size: 1.4rem;
-    color: #00ffbb;
-    font-weight: bold;
-    margin-top: 15px;
-  }
-  #final-message {
-    margin-top: 25px;
-    font-size: 1.5rem;
-    color: #00ffaa;
-    font-weight: bold;
-    text-shadow: 0 0 10px #00ffaa;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>عيد ميلاد سعيد محمد 🎉</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #cce7ff, #e6f2ff);
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+    }
+
+    header {
+      background-color: #007acc;
+      color: white;
+      padding: 15px;
+      font-size: 2em;
+    }
+
+    .progress {
+      margin: 15px auto;
+      font-size: 1.2em;
+      color: #003d66;
+    }
+
+    .question-box {
+      background-color: #e0f0ff;
+      margin: 20px auto;
+      padding: 25px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      font-size: 1.5em;
+    }
+
+    .options label {
+      display: block;
+      background: white;
+      margin: 10px auto;
+      padding: 10px;
+      border-radius: 10px;
+      width: 90%;
+      cursor: pointer;
+      border: 2px solid #3399ff;
+      transition: 0.3s;
+      font-size: 1.2em;
+    }
+
+    .options label:hover {
+      background-color: #d0ebff;
+    }
+
+    .result {
+      font-size: 1.4em;
+      color: #004466;
+      margin: 30px;
+    }
+
+  </style>
 </head>
 <body>
-  <div class="container">
-    <img src="IMG_٢٠٢٥٠٦٠٥_٢٢٠٠٠٨.jpg" alt="محمد" />
-    <h1>اختبار الحب - عيد ميلاد سعيد محمد</h1>
-    <div id="progress"></div>
-    <div id="question"></div>
-    <div class="options"></div>
-    <div id="score"></div>
-    <div id="final-message"></div>
-  </div>
+  <img src="IMG_٢٠٢٥٠٦٠٥_٢٢٠٠٠٨.jpg" alt="محمد">
+  <header>🎂 عيد ميلاد سعيد محمد 🎂</header>
+  <div class="progress" id="progress">السؤال 1 من 20</div>
+  <div class="question-box" id="question-box"></div>
+  <div class="result" id="result"></div>
 
-<script>
-  const questions = [
-    "واش الحاجة اللي مايخبوهاش العشاق تتفكر؟",
-    "واش يدير العاشق كي يشوف معشوقو بعيد؟",
-    "شحال من مرة قالنا ليك 'نحبك' بصراحة؟",
-    "فين تعرفت على فطومة؟",
-    "واش هي أجمل ذكرى جمعتكم؟",
-    "كيفاش تتصرف كي تعصب عليها؟",
-    "شنو سر العلاقة الناجحة؟",
-    "كيفاش تعبر على حبك بالكلام؟",
-    "شنو اللون اللي يعبر على حبك ليها؟",
-    "واش تحب تهديها في عيد الميلاد؟",
-    "كي تكون بعيد عليها، واش تحس؟",
-    "كيفاش تحاول تصلح المشاكل بيناتكم؟",
-    "شنو أكتر حاجة تعجبك فيها؟",
-    "كيفاش تتخيل حياتكم مع بعض بعد 10 سنوات؟",
-    "واش كتفضل قعدة هادئة ولا مغامرة معاها؟",
-    "شنو أول حاجة لاحظتها فيها؟",
-    "كي تحس بالغيرة، كيفاش تتصرف؟",
-    "شنو أطرف موقف صار بيناتكم؟",
-    "واش كتصدق بالحب من أول نظرة؟",
-    "شنو أفضل نصيحة تعلمتها من علاقتكم؟"
-  ];
+  <script>
+    const questions = [
+      { q: "واش الحاجة اللي مايخبوهاش العشاق؟", options: ["المشاعر", "الكذب", "الهدايا"], correct: 0 },
+      { q: "واش يدير العاشق كي يسمع صوت محبوبو؟", options: ["يفرح", "يبكي", "يقلق"], correct: 0 },
+      { q: "شكون يكون أغلى من الناس عند العاشق؟", options: ["أهلو", "محبوبو", "صاحب طفولتو"], correct: 1 },
+      { q: "في الحب، القلب يهدر ولا العقل؟", options: ["القلب", "العقل", "زوج"], correct: 0 },
+      { q: "كي تشوف محبوبك، وش تحس؟", options: ["بالراحة", "بالتوتر", "بالخوف"], correct: 0 },
+      { q: "وش أقوى كلمة فالحب؟", options: ["نحبك", "نشتاقلك", "مانقدرش نعيش بلا بيك"], correct: 2 },
+      { q: "الحب واش يبدل في الشخص؟", options: ["يحليه", "يقلقه", "يضعف ثقتو"], correct: 0 },
+      { q: "كي يغيب محبوبك، وش تولي؟", options: ["تخمم فيه", "تنسا", "تخرج تتونس"], correct: 0 },
+      { q: "وش الحاجة اللي تزيد الحب؟", options: ["الاهتمام", "الغيرة", "الرسائل"], correct: 0 },
+      { q: "كي تعيط محبوبك، وش أول كلمة تقولها؟", options: ["سلام", "حبي", "اسم محبوبك"], correct: 1 },
+      { q: "الحب واش هو فالحقيقة؟", options: ["إحساس", "تعلق", "هوس"], correct: 0 },
+      { q: "كي تكون زعفان، وش يديرلك محبوبك؟", options: ["يراضيك", "يخليك", "يزعف معاك"], correct: 0 },
+      { q: "وش يجرح فالحب؟", options: ["الخيانة", "الإهمال", "النسيان"], correct: 0 },
+      { q: "كي تكون وحدك، واش يدور فبالك؟", options: ["محبوبك", "الهموم", "النجاح"], correct: 0 },
+      { q: "أغلى لحظة في الحب؟", options: ["أول اعتراف", "أول نظرة", "أول عناق"], correct: 2 },
+      { q: "وش أحسن هدية فالحب؟", options: ["الكلمة الصادقة", "العطر", "الدبدوب"], correct: 0 },
+      { q: "وش أقرب طريق للقلب؟", options: ["الاحترام", "الجمال", "الفلوس"], correct: 0 },
+      { q: "وش يدير العاشق قبل ما ينعس؟", options: ["يتفكر محبوبو", "يشوف صور", "يبكي"], correct: 0 },
+      { q: "الحب واش يعلمنا؟", options: ["الصبر", "الأنانية", "الغرور"], correct: 0 },
+      { q: "آخر كلمة تقولها لمحبوبك؟", options: ["نحبك", "ما تخلينيش", "ديما معايا"], correct: 0 }
+    ];
 
-  const answers = [
-    "الذكرى والحب الصادق",
-    "يحاول يقرب ويعاود الاتصال",
-    "مرة كثيرة ومش دايما بكلام",
-    "في حفلة الأصدقاء",
-    "الضحك والمغامرات اللي عشناها",
-    "يحاول يهدأ ويتفاهم معاها",
-    "الثقة والصراحة",
-    "بالحكي والكلمات الجميلة",
-    "الأحمر اللي يعبر على الشغف",
-    "هدية من القلب",
-    "يوجع القلب ويزيد الاشتياق",
-    "بالصبر والكلام الهادئ",
-    "ابتسامتها وروحها الطيبة",
-    "عايشين حياة سعيدة ومستقرة",
-    "القعدة الهادئة تجمعكم أكتر",
-    "ابتسامتها الأولى",
-    "يحاول يسيطر على غيرته",
-    "موقف مضحك وسط الأصدقاء",
-    "نعم أكيد",
-    "الصبر والتفاهم"
-  ];
+    let current = 0;
+    let score = 0;
+    const qbox = document.getElementById("question-box");
+    const progress = document.getElementById("progress");
+    const result = document.getElementById("result");
 
-  let current = 0;
-  let score = 0;
-
-  const progressEl = document.getElementById('progress');
-  const questionEl = document.getElementById('question');
-  const optionsEl = document.querySelector('.options');
-  const scoreEl = document.getElementById('score');
-  const finalMessageEl = document.getElementById('final-message');
-
-  function showQuestion() {
-    progressEl.textContent = `السؤال ${current + 1} من ${questions.length}`;
-    questionEl.textContent = questions[current];
-    optionsEl.innerHTML = '';
-
-    const btn = document.createElement('button');
-    btn.textContent = 'عرض الإجابة الصحيحة';
-    btn.classList.add('option-btn');
-    btn.onclick = () => {
-      showAnswer();
-    };
-    optionsEl.appendChild(btn);
-  }
-
-  function showAnswer() {
-    optionsEl.innerHTML = '';
-    const correctBtn = document.createElement('button');
-    correctBtn.textContent = `الإجابة: ${answers[current]}`;
-    correctBtn.classList.add('option-btn', 'correct');
-    optionsEl.appendChild(correctBtn);
-
-    // زيادة العلامة هنا، لأن كل إجابة صحيحة محسوبة (لأنها ثابتة)
-    score++;
-
-    const nextBtn = document.createElement('button');
-    nextBtn.textContent = current < questions.length - 1 ? 'السؤال التالي' : 'انهاء الاختبار';
-    nextBtn.classList.add('option-btn');
-    nextBtn.onclick = () => {
-      current++;
-      if (current < questions.length) {
-        showQuestion();
-        scoreEl.textContent = `النتيجة الحالية: ${score} / ${questions.length}`;
-        finalMessageEl.textContent = '';
-      } else {
-        showFinal();
+    function loadQuestion() {
+      if (current >= questions.length) {
+        showResult();
+        return;
       }
-    };
-    optionsEl.appendChild(nextBtn);
-  }
+      progress.textContent = `السؤال ${current + 1} من ${questions.length}`;
+      const q = questions[current];
+      let html = `<div>${q.q}</div><div class="options">`;
+      q.options.forEach((opt, i) => {
+        html += `<label onclick="checkAnswer(${i})">${opt}</label>`;
+      });
+      html += `</div>`;
+      qbox.innerHTML = html;
+    }
 
-  function showFinal() {
-    questionEl.textContent = '';
-    progressEl.textContent = '';
-    optionsEl.innerHTML = '';
-    scoreEl.textContent = `النتيجة النهائية: ${score} من ${questions.length}`;
-    finalMessageEl.innerHTML = `
-      ❤ <strong>تربح ديما يا محمد، لأنك ربحت قلب فطومة</strong> ❤<br/>
-      🎉 <strong>عيد ميلاد سعيد وربي يدوم محبتنا</strong> 🎉
-    `;
-  }
+    function checkAnswer(index) {
+      const correct = questions[current].correct;
+      const labels = document.querySelectorAll(".options label");
+      labels.forEach((label, i) => {
+        label.style.backgroundColor = i === correct ? '#b2f2bb' : (i === index ? '#ffcccc' : 'white');
+        label.onclick = null;
+      });
+      if (index === correct) score++;
+      setTimeout(() => {
+        current++;
+        loadQuestion();
+      }, 1000);
+    }
 
-  showQuestion();
-</script>
+    function showResult() {
+      qbox.style.display = "none";
+      progress.style.display = "none";
+      let message = score >= 10 ? "🎉 مبروك ربحت 🎉" : "💔 ما ربحتش كامل 💔";
+      result.innerHTML = `
+        ${message}<br>
+        نتيجتك: ${score} / ${questions.length}<br><br>
+        ❤️ بصح مهما كانت نتيجتك، راك ربحت قلبي يا محمد ❤️<br>
+        🎂 عيد ميلاد سعيد وربي يدوم محبتنا 🎂
+      `;
+    }
+
+    loadQuestion();
+  </script>
 </body>
 </html>
