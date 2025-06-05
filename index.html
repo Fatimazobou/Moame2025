@@ -1,187 +1,236 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>عيد ميلاد سعيد محمد 🎉</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #cce6ff, #e6f2ff);
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
-    .quiz-container {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      padding: 30px;
-      width: 90%;
-      max-width: 500px;
+      background-color: #e3f2fd;
+      font-family: 'Tahoma', sans-serif;
       text-align: center;
+      direction: rtl;
+      padding: 0;
+      margin: 0;
     }
-    h1 {
-      color: #0059b3;
-    }
-    .question {
-      font-size: 20px;
-      margin-bottom: 20px;
-    }
-    .choices {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .choice {
-      background: #e6f0ff;
-      border: none;
-      padding: 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background 0.3s;
-    }
-    .choice:hover {
-      background: #b3d1ff;
-    }
-    #next-btn {
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 0 15px #90caf9;
       margin-top: 20px;
+    }
+    img {
+      width: 150px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+    button {
+      background-color: #2196f3;
+      color: white;
       padding: 10px 20px;
       font-size: 16px;
+      margin: 10px;
       border: none;
       border-radius: 10px;
-      background-color: #3399ff;
-      color: white;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
-    #result {
-      font-size: 20px;
-      margin-top: 20px;
-      color: #0073e6;
+    button:hover {
+      background-color: #1976d2;
     }
-    .counter {
-      font-size: 16px;
-      margin-bottom: 10px;
+    .hidden { display: none; }
+    .question-count {
+      font-weight: bold;
+      color: #1565c0;
+    }
+    #options button {
+      display: block;
+      width: 100%;
+      margin: 10px auto;
+    }
+    .result {
+      margin-top: 10px;
+      font-size: 18px;
       color: #333;
     }
   </style>
 </head>
 <body>
-  <div class="quiz-container">
-    <h1>🎉 عيد ميلاد سعيد محمد 🎂</h1>
-    <div class="counter" id="counter"></div>
-    <div class="question" id="question"></div>
-    <div class="choices" id="choices"></div>
-    <button id="next-btn" onclick="nextQuestion()">التالي</button>
-    <div id="result"></div>
-  </div>  <audio id="bg-music" autoplay loop>
-    <source src="https://github.com/username/music-folder/raw/main/happy_birthday_no_music.mp3" type="audio/mp3" />
-  </audio>  <script>
-    const questions = [
-      {
-        question: "ما أكثر شيء تحبه فطومة في محمد؟",
-        choices: ["صوته", "ضحكته", "قلبه", "كله"],
-        answer: "كله"
-      },
-      {
-        question: "أين سيكون أول مكان نلتقي فيه بإذن الله؟",
-        choices: ["الحديقة", "المسجد", "شاطئ البحر", "أي مكان معك جميل"],
-        answer: "أي مكان معك جميل"
-      },
-      {
-        question: "كيف تحتفل فطومة بهذا اليوم؟",
-        choices: ["بأغنية", "بهدية رقمية", "بدعاء من القلب", "كل ما سبق"],
-        answer: "كل ما سبق"
-      },
-      {
-        question: "ماذا تقول فطومة لمحمد في عيده؟",
-        choices: ["عيد سعيد", "أنت نور حياتي", "كل عام وأنت بخير", "كلهم مع بعض"],
-        answer: "كلهم مع بعض"
-      },
-      {
-        question: "ما لون محمد المفضل؟",
-        choices: ["الأحمر", "الأزرق", "الأخضر", "الأسود"],
-        answer: "الأزرق"
-      },
-      {
-        question: "كم عمر محمد اليوم؟",
-        choices: ["20", "21", "22", "19"],
-        answer: "21"
-      },
-      {
-        question: "ما هو شعار حبنا؟",
-        choices: ["مع بعض رغم البعد", "حبنا كبير", "نتحدى العالم", "كل ما سبق"],
-        answer: "كل ما سبق"
-      },
-      {
-        question: "أكثر لحظة تتخيلها فطومة مع محمد؟",
-        choices: ["ضحكة معًا", "صلاة جمعة", "نزهة في البحر", "كلها"],
-        answer: "كلها"
-      },
-      {
-        question: "فطومة تقول: محمد هو...",
-        choices: ["نصف القلب", "كل الحياة", "فرحي", "الكل"],
-        answer: "الكل"
-      },
-      {
-        question: "رسالة فطومة لمحمد اليوم؟",
-        choices: ["أحبك", "اشتقتلك", "أنت عيدي", "كلها"],
-        answer: "كلها"
-      },
-      // يمكنك إضافة 10 أسئلة أخرى بنفس النمط لبلوغ 20 سؤالاً
-    ];
 
-    let currentQuestion = 0;
-    let score = 0;
+<div class="container">
+  <img src="IMG_٢٠٢٥٠٦٠٥_٢٢٠٠٠٨.jpg" alt="صورة محمد">
+  <h1>عيد ميلاد سعيد يا محمد 🎂💙</h1>
+  <p>من عند فطومة ❤️</p>
+  <button onclick="startQuiz()">ابدأ اللعبة</button>
 
-    function showQuestion() {
-      const q = questions[currentQuestion];
-      document.getElementById("question").innerText = q.question;
-      document.getElementById("counter").innerText = `السؤال ${currentQuestion + 1} من ${questions.length}`;
+  <div id="quiz" class="hidden">
+    <p class="question-count" id="counter"></p>
+    <p id="question"></p>
+    <div id="options"></div>
+    <p class="result" id="result"></p>
+  </div>
 
-      const choicesDiv = document.getElementById("choices");
-      choicesDiv.innerHTML = "";
-      q.choices.forEach(choice => {
-        const btn = document.createElement("button");
-        btn.innerText = choice;
-        btn.classList.add("choice");
-        btn.onclick = () => checkAnswer(choice);
-        choicesDiv.appendChild(btn);
-      });
-    }
+  <div id="end" class="hidden">
+    <h2>🎉 مبروك يا محمد 🎉</h2>
+    <p id="score"></p>
+    <p>هذه هديتي لعيد ميلادك الـ21 🎁</p>
+    <p>ربي يحفظك ونبقى نحبك ديما 💙</p>
+  </div>
+</div>
 
-    function checkAnswer(choice) {
-      const correct = questions[currentQuestion].answer;
-      if (choice === correct) {
-        score++;
-      }
-      document.querySelectorAll(".choice").forEach(btn => {
-        btn.disabled = true;
-        if (btn.innerText === correct) {
-          btn.style.backgroundColor = "#c1f0c1";
-        } else if (btn.innerText === choice) {
-          btn.style.backgroundColor = "#ffb3b3";
-        }
-      });
-    }
+<script>
+const questions = [
+  {
+    question: "ما هو الشيء الذي لا يستطيع العاشق إخفاءه؟",
+    options: ["الغيرة", "الابتسامة", "الحب", "الدموع"],
+    answer: "الحب"
+  },
+  {
+    question: "ما هو أكثر شيء يجعل العلاقة أقوى؟",
+    options: ["الهدايا", "المال", "الصدق", "السفر"],
+    answer: "الصدق"
+  },
+  {
+    question: "إذا قلتلك أحبك، ماذا تقول؟",
+    options: ["أنا أكثر", "أنا أحبك أكثر", "أنا أذوب", "ولا كلمة"],
+    answer: "أنا أحبك أكثر"
+  },
+  {
+    question: "أين يلتقي العشاق بدون ميعاد؟",
+    options: ["في الحلم", "في الحقيقة", "في القلب", "في السوق"],
+    answer: "في القلب"
+  },
+  {
+    question: "أكثر شيء يزعج فطومة لما محمد يفعله؟",
+    options: ["ينسى الرسائل", "ما يضحكش", "ما يردش", "ما يقولش صباح الخير"],
+    answer: "ما يردش"
+  },
+  {
+    question: "ما هو الحلم المشترك بيننا؟",
+    options: ["السفر", "الزواج", "بيت صغير", "العيش سوا"],
+    answer: "العيش سوا"
+  },
+  {
+    question: "كم مرة قلتلك نحبك؟",
+    options: ["100", "ألف", "مليون", "لا تحصى"],
+    answer: "لا تحصى"
+  },
+  {
+    question: "أول كلمة خطرتلك كي شفتني؟",
+    options: ["ملاك", "جميلة", "روحي", "غريبة"],
+    answer: "روحي"
+  },
+  {
+    question: "من فينا أكثر رومنسية؟",
+    options: ["محمد", "فطومة", "الاثنين", "ما نعرفش"],
+    answer: "فطومة"
+  },
+  {
+    question: "هل الحب يُقاس بالكلمات؟",
+    options: ["لا", "أحيانا", "نعم", "بالأفعال فقط"],
+    answer: "لا"
+  },
+  {
+    question: "أين يكون الحب الحقيقي؟",
+    options: ["في العقل", "في القلب", "في الخيال", "في الوقت"],
+    answer: "في القلب"
+  },
+  {
+    question: "هل أشتاق لك الآن؟",
+    options: ["أكيد", "ربما", "ما نظنش", "لا"],
+    answer: "أكيد"
+  },
+  {
+    question: "هل أحلامنا رح تتحقق؟",
+    options: ["نعم", "ان شاء الله", "أكيد", "بالصبر"],
+    answer: "أكيد"
+  },
+  {
+    question: "أكثر حاجة نحبها فيك؟",
+    options: ["عيونك", "ضحكتك", "صراحتك", "كلك"],
+    answer: "كلك"
+  },
+  {
+    question: "هل الحب لعبة؟",
+    options: ["لا", "أحيانا", "نعم", "نعم بس حلوة"],
+    answer: "لا"
+  },
+  {
+    question: "نقطة ضعف العشاق؟",
+    options: ["الفراق", "الخيانة", "الغيرة", "الشوق"],
+    answer: "الفراق"
+  },
+  {
+    question: "أين أهرب لما أشتاقلك؟",
+    options: ["صورتك", "ذاكرتي", "قلبي", "رسائلك"],
+    answer: "رسائلك"
+  },
+  {
+    question: "كيف أعبّر لك عن الحب؟",
+    options: ["بالكلام", "بالأفعال", "بالرسائل", "كل هذا"],
+    answer: "كل هذا"
+  },
+  {
+    question: "شو يعني محمد عندي؟",
+    options: ["حب", "حياة", "هوائي", "كل شيء"],
+    answer: "كل شيء"
+  },
+  {
+    question: "هل الحب أقوى من الوقت؟",
+    options: ["أكيد", "لا", "ربما", "إذا صبرنا"],
+    answer: "أكيد"
+  }
+];
 
-    function nextQuestion() {
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        showQuestion();
-      } else {
-        document.getElementById("question").innerText = "انتهت اللعبة!";
-        document.getElementById("choices").innerHTML = "";
-        document.getElementById("counter").innerText = "✔️";
-        document.getElementById("result").innerText = `🎁 هديتك: حب كبير من فطومة لا ينوصف 🌸\nحصلت على ${score} من ${questions.length}`;
-        document.getElementById("next-btn").style.display = "none";
-      }
-    }
+let current = 0, score = 0;
 
-    showQuestion();
-  </script></body>
+function startQuiz() {
+  document.querySelector('button').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  showQuestion();
+}
+
+function showQuestion() {
+  const q = questions[current];
+  document.getElementById('counter').textContent = `السؤال ${current + 1} من ${questions.length}`;
+  document.getElementById('question').textContent = q.question;
+  const opts = document.getElementById('options');
+  opts.innerHTML = '';
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.textContent = opt;
+    btn.onclick = () => checkAnswer(opt);
+    opts.appendChild(btn);
+  });
+  document.getElementById('result').textContent = '';
+}
+
+function checkAnswer(answer) {
+  const correct = questions[current].answer;
+  const result = document.getElementById('result');
+  if (answer === correct) {
+    result.textContent = '✔️ إجابة صحيحة!';
+    result.style.color = 'green';
+    score++;
+  } else {
+    result.textContent = `❌ خطأ! الإجابة الصحيحة: ${correct}`;
+    result.style.color = 'red';
+  }
+  current++;
+  setTimeout(() => {
+    if (current < questions.length) showQuestion();
+    else endQuiz();
+  }, 1200);
+}
+
+function endQuiz() {
+  document.getElementById('quiz').classList.add('hidden');
+  document.getElementById('end').classList.remove('hidden');
+  document.getElementById('score').textContent = `علامتك: ${score} من ${questions.length}`;
+}
+</script>
+
+</body>
 </html>
