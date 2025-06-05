@@ -1,171 +1,187 @@
-<!DOCTYPE html><html lang="ar">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>هدية عيد ميلاد محمد 🎉</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>عيد ميلاد سعيد محمد 🎉</title>
   <style>
     body {
-      font-family: 'Tahoma', sans-serif;
-      background: linear-gradient(to bottom right, #cbe4f9, #e2efff);
-      color: #222;
       margin: 0;
       padding: 0;
+      background: linear-gradient(to bottom right, #cce6ff, #e6f2ff);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .quiz-container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
       text-align: center;
     }
-    .container {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    }
     h1 {
-      color: #005baa;
-      margin-bottom: 10px;
+      color: #0059b3;
     }
     .question {
       font-size: 20px;
       margin-bottom: 20px;
     }
-    .options button {
-      background-color: #007bff;
-      color: #fff;
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .choice {
+      background: #e6f0ff;
       border: none;
-      border-radius: 12px;
-      padding: 10px 20px;
-      margin: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      font-size: 16px;
-    }
-    .options button:hover {
-      background-color: #0056b3;
-    }
-    .progress-bar {
-      height: 20px;
-      background-color: #e0e0e0;
+      padding: 12px;
       border-radius: 10px;
-      overflow: hidden;
-      margin: 20px 0;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
     }
-    .progress {
-      height: 100%;
-      background-color: #00b4d8;
-      width: 0%;
+    .choice:hover {
+      background: #b3d1ff;
+    }
+    #next-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background-color: #3399ff;
+      color: white;
+      cursor: pointer;
     }
     #result {
-      font-size: 24px;
+      font-size: 20px;
       margin-top: 20px;
-      color: #007f5f;
+      color: #0073e6;
     }
-    #startBtn {
-      font-size: 18px;
-      background-color: #f77f00;
-      padding: 12px 25px;
-      border: none;
-      color: white;
-      border-radius: 15px;
-      margin-top: 30px;
-      cursor: pointer;
-    }
-    audio {
-      display: none;
+    .counter {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #333;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🎉 مفاجأة عيد ميلادك يا محمد 🎂</h1>
-    <p>من فطومة ❤️</p><button id="startBtn">ابدأ الهدية</button>
-
-<div id="quiz" style="display:none">
-  <div class="progress-bar">
-    <div class="progress" id="progress"></div>
-  </div>
-  <div class="question" id="question"></div>
-  <div class="options" id="options"></div>
-</div>
-
-<div id="result"></div>
-
-<audio id="birthdayAudio" autoplay>
-  <source src="https://github.com/yourusername/musicrepo/raw/main/happy-birthday.mp3" type="audio/mpeg">
-</audio>
-
-  </div>  <script>
+  <div class="quiz-container">
+    <h1>🎉 عيد ميلاد سعيد محمد 🎂</h1>
+    <div class="counter" id="counter"></div>
+    <div class="question" id="question"></div>
+    <div class="choices" id="choices"></div>
+    <button id="next-btn" onclick="nextQuestion()">التالي</button>
+    <div id="result"></div>
+  </div>  <audio id="bg-music" autoplay loop>
+    <source src="https://github.com/username/music-folder/raw/main/happy_birthday_no_music.mp3" type="audio/mp3" />
+  </audio>  <script>
     const questions = [
-      { q: "شنو أول كلمة قلتها لي؟", options: ["سلام", "واش راكي؟", "أهلاً", "أنا محمد"], correct: 0 },
-      { q: "وش لونك المفضل؟", options: ["أزرق", "أخضر", "أحمر", "أسود"], correct: 0 },
-      { q: "تاريخ أول مرة حكينا؟", options: ["2023", "2024", "2022", "2021"], correct: 1 },
-      { q: "شنو ناديتني في أول مرة؟", options: ["زهرة", "فطومة", "حبيبتي", "نعم؟"], correct: 1 },
-      { q: "وش يفرحك أكثر؟", options: ["قهوة", "أنا 😜", "كرة القدم", "النوم"], correct: 1 },
-      { q: "عيد ميلادك يوافق؟", options: ["عيد الأضحى", "رمضان", "المولد النبوي", "لاشيء"], correct: 0 },
-      { q: "تحب النكت؟", options: ["نعم", "لا", "حسب النكتة", "مش دايمًا"], correct: 0 },
-      { q: "أكثر شي تحب تاكلو؟", options: ["كسكس", "بيتزا", "مقرونة", "شاورما"], correct: 2 },
-      { q: "تحب اللون الأزرق؟", options: ["أكيد", "شوي", "لا", "ما أعرف"], correct: 0 },
-      { q: "وش شعورك لما تسمع صوتي؟", options: ["يرتاح قلبي ❤️", "عادي", "تقلق 😆", "أخاف"], correct: 0 },
-      { q: "إذا حكينا أقل من يوم، تحس؟", options: ["ناقص شيء", "مرتاح", "ولا شي", "نص نص"], correct: 0 },
-      { q: "أقرب شيء ليك مني؟", options: ["الكلام", "النية", "الاهتمام", "الكل"], correct: 3 },
-      { q: "كم مرة ضحكت بسببي؟", options: ["كل يوم", "مرات قليلة", "ولا مرة 😒", "ما نحسبش"], correct: 0 },
-      { q: "عيد ميلادك هذا أي سنة؟", options: ["21", "22", "23", "20"], correct: 0 },
-      { q: "هل تحب الألعاب؟", options: ["أكيد", "لا", "أحيانا", "بزاف"], correct: 3 },
-      { q: "وش تحب تسمع مني؟", options: ["نحبك ❤️", "تصبح على خير", "اسمي فقط", "فطومة"], correct: 0 },
-      { q: "أجمل لحظة بيننا؟", options: ["أول مكالمة", "كل لحظة", "أول رسالة", "كلهم"], correct: 3 },
-      { q: "شنو لون عيونك؟", options: ["أسود", "بني", "أزرق", "رمادي"], correct: 1 },
-      { q: "وش رايك في هديتي؟", options: ["روعة!", "بسيطة بس حلوة", "كنت متوقع أحسن", "لا تعليق"], correct: 0 },
-      { q: "شنو تحب تقوليك اليوم؟", options: ["نحبك ❤️", "عيد ميلاد سعيد 🎂", "انت قلبي", "كلشي 😍"], correct: 3 },
+      {
+        question: "ما أكثر شيء تحبه فطومة في محمد؟",
+        choices: ["صوته", "ضحكته", "قلبه", "كله"],
+        answer: "كله"
+      },
+      {
+        question: "أين سيكون أول مكان نلتقي فيه بإذن الله؟",
+        choices: ["الحديقة", "المسجد", "شاطئ البحر", "أي مكان معك جميل"],
+        answer: "أي مكان معك جميل"
+      },
+      {
+        question: "كيف تحتفل فطومة بهذا اليوم؟",
+        choices: ["بأغنية", "بهدية رقمية", "بدعاء من القلب", "كل ما سبق"],
+        answer: "كل ما سبق"
+      },
+      {
+        question: "ماذا تقول فطومة لمحمد في عيده؟",
+        choices: ["عيد سعيد", "أنت نور حياتي", "كل عام وأنت بخير", "كلهم مع بعض"],
+        answer: "كلهم مع بعض"
+      },
+      {
+        question: "ما لون محمد المفضل؟",
+        choices: ["الأحمر", "الأزرق", "الأخضر", "الأسود"],
+        answer: "الأزرق"
+      },
+      {
+        question: "كم عمر محمد اليوم؟",
+        choices: ["20", "21", "22", "19"],
+        answer: "21"
+      },
+      {
+        question: "ما هو شعار حبنا؟",
+        choices: ["مع بعض رغم البعد", "حبنا كبير", "نتحدى العالم", "كل ما سبق"],
+        answer: "كل ما سبق"
+      },
+      {
+        question: "أكثر لحظة تتخيلها فطومة مع محمد؟",
+        choices: ["ضحكة معًا", "صلاة جمعة", "نزهة في البحر", "كلها"],
+        answer: "كلها"
+      },
+      {
+        question: "فطومة تقول: محمد هو...",
+        choices: ["نصف القلب", "كل الحياة", "فرحي", "الكل"],
+        answer: "الكل"
+      },
+      {
+        question: "رسالة فطومة لمحمد اليوم؟",
+        choices: ["أحبك", "اشتقتلك", "أنت عيدي", "كلها"],
+        answer: "كلها"
+      },
+      // يمكنك إضافة 10 أسئلة أخرى بنفس النمط لبلوغ 20 سؤالاً
     ];
 
-    let current = 0;
+    let currentQuestion = 0;
     let score = 0;
 
-    const questionEl = document.getElementById("question");
-    const optionsEl = document.getElementById("options");
-    const resultEl = document.getElementById("result");
-    const progressEl = document.getElementById("progress");
-    const quizEl = document.getElementById("quiz");
-    const audio = document.getElementById("birthdayAudio");
-
-    document.getElementById("startBtn").onclick = () => {
-      document.getElementById("startBtn").style.display = "none";
-      quizEl.style.display = "block";
-      audio.play();
-      showQuestion();
-    };
-
     function showQuestion() {
-      if (current >= questions.length) {
-        showResult();
-        return;
-      }
+      const q = questions[currentQuestion];
+      document.getElementById("question").innerText = q.question;
+      document.getElementById("counter").innerText = `السؤال ${currentQuestion + 1} من ${questions.length}`;
 
-      const q = questions[current];
-      questionEl.textContent = q.q;
-      optionsEl.innerHTML = "";
-
-      q.options.forEach((option, idx) => {
+      const choicesDiv = document.getElementById("choices");
+      choicesDiv.innerHTML = "";
+      q.choices.forEach(choice => {
         const btn = document.createElement("button");
-        btn.textContent = option;
-        btn.onclick = () => {
-          if (idx === q.correct) score++;
-          current++;
-          updateProgress();
-          showQuestion();
-        };
-        optionsEl.appendChild(btn);
+        btn.innerText = choice;
+        btn.classList.add("choice");
+        btn.onclick = () => checkAnswer(choice);
+        choicesDiv.appendChild(btn);
       });
     }
 
-    function updateProgress() {
-      const percent = Math.floor((current / questions.length) * 100);
-      progressEl.style.width = percent + "%";
+    function checkAnswer(choice) {
+      const correct = questions[currentQuestion].answer;
+      if (choice === correct) {
+        score++;
+      }
+      document.querySelectorAll(".choice").forEach(btn => {
+        btn.disabled = true;
+        if (btn.innerText === correct) {
+          btn.style.backgroundColor = "#c1f0c1";
+        } else if (btn.innerText === choice) {
+          btn.style.backgroundColor = "#ffb3b3";
+        }
+      });
     }
 
-    function showResult() {
-      quizEl.style.display = "none";
-      resultEl.innerHTML = `<p>🎊 محمد 🎊<br> جبت ${score} من ${questions.length}!<br><br>
-        عيد ميلاد سعيد 21 🎂، تبقى ديما في قلبي ❤️<br>
-        محبة من فطومة 😘</p>`;
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById("question").innerText = "انتهت اللعبة!";
+        document.getElementById("choices").innerHTML = "";
+        document.getElementById("counter").innerText = "✔️";
+        document.getElementById("result").innerText = `🎁 هديتك: حب كبير من فطومة لا ينوصف 🌸\nحصلت على ${score} من ${questions.length}`;
+        document.getElementById("next-btn").style.display = "none";
+      }
     }
+
+    showQuestion();
   </script></body>
 </html>
