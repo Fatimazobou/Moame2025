@@ -23,12 +23,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      background: #fff; /* خلفية بيضاء */
     }
 
     .image-container img {
+      width: 100%;
       height: 100%;
-      width: auto;
-      object-fit: contain;
+      object-fit: cover;  /* يملأ الحاوية بدون تشويه */
+      object-position: center; /* مركز الصورة */
     }
 
     header {
