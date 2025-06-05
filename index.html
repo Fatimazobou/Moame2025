@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>عيد ميلاد سعيد محمد 🎉</title>
   <style>
     body {
@@ -12,17 +12,17 @@
       text-align: center;
     }
 
-    .profile-pic {
+    .image-container {
       width: 200px;
       height: 200px;
       margin: 20px auto;
       border-radius: 50%;
       overflow: hidden;
-      border: 5px solid #007acc;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border: 4px solid #007acc;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
-    .profile-pic img {
+    .image-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -46,8 +46,8 @@
       margin: 20px auto;
       padding: 25px;
       border-radius: 15px;
-      width: 100%;
-      max-width: none;
+      width: 95%;
+      max-width: 800px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       font-size: 1.5em;
     }
@@ -55,11 +55,11 @@
     .options label {
       display: block;
       background: white;
-      margin: 10px 0;
+      margin: 10px auto;
       padding: 15px;
       border-radius: 10px;
-      width: 100%;
-      max-width: none;
+      width: 95%;
+      max-width: 700px;
       cursor: pointer;
       border: 2px solid #3399ff;
       transition: 0.3s;
@@ -78,13 +78,11 @@
   </style>
 </head>
 <body>
-
-  <div class="profile-pic">
-    <img src="IMG_٢٠٢٥٠٦٠٥_٢٢٢٣١٩.jpg" alt="محمد">
+  <div class="image-container">
+    <img src="IMG_٢٠٢٥٠٦٠٥_٢٢٠٠٠٨.jpg" alt="محمد" />
   </div>
 
   <header>🎂 عيد ميلاد سعيد محمد 🎂</header>
-
   <div class="progress" id="progress">السؤال 1 من 20</div>
   <div class="question-box" id="question-box"></div>
   <div class="result" id="result"></div>
@@ -162,6 +160,5 @@
 
     loadQuestion();
   </script>
-
 </body>
 </html>
