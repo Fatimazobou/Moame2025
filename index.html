@@ -1,166 +1,274 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>عيد ميلاد سعيد محمد 🎉</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      direction: rtl;
+      background-color: #f0f8ff;
       font-family: 'Arial', sans-serif;
-      background-color: #e0f7fa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      overflow-x: hidden;
     }
 
-    .container {
-      width: 100vw;
-      height: 100vh;
-      background: #ffffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-
-    img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid #00796b;
-      margin-bottom: 10px;
-    }
-
-    h1 {
-      color: #00796b;
-      margin: 10px 0;
-    }
-
-    p {
-      color: #004d40;
-      font-size: 18px;
-      margin: 5px 0 20px;
-    }
-
-    button {
-      background-color: #00796b;
+    header {
+      background-color: #005f99;
       color: white;
-      padding: 10px 25px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 15px;
-    }
-
-    #quiz,
-    #end {
-      width: 100%;
-      max-width: 600px;
-      margin-top: 20px;
       text-align: center;
+      padding: 25px 10px;
+      font-size: 2.5em;
     }
 
-    .hidden {
-      display: none;
+    .subheader {
+      text-align: center;
+      color: #333;
+      font-size: 1.4em;
+      margin: 15px;
     }
 
-    .option {
-      display: block;
-      background-color: #b2dfdb;
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0;
+    }
+
+    .image-container img {
+      max-width: 95%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .quiz-container {
+      max-width: 900px;
+      margin: auto;
       padding: 10px;
-      margin: 10px auto;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease;
     }
 
-    .option:hover {
-      background-color: #80cbc4;
+    .question {
+      background-color: #cce7ff;
+      margin: 15px 0;
+      padding: 20px;
+      border-radius: 15px;
+      font-size: 1.3em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .options {
+      margin-top: 10px;
+    }
+
+    .options label {
+      display: block;
+      margin: 8px 0;
+      background-color: white;
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 2px solid #007acc;
+      transition: 0.3s;
+      font-size: 1.1em;
+      cursor: pointer;
+    }
+
+    .options label:hover {
+      background-color: #e6f5ff;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="https://via.placeholder.com/120" alt="محمد">
-    <h1>عيد ميلاد سعيد محمد 🎉</h1>
-    <p>من عند فطومة ❤️</p>
-    <button onclick="startQuiz()">ابدأ اللعبة</button>
 
-    <div id="quiz" class="hidden">
-      <h2 id="questionText"></h2>
-      <div id="options"></div>
+  <header>🎂 عيد ميلاد سعيد محمد 🎂</header>
+  <div class="subheader">
+    أحلى عيد ميلاد لأطيب قلب، ربي يدومك ليّ ويخليك ديما فرحان ❤️
+  </div>
+
+  <div class="image-container">
+    <img src="IMG_٢٠٢٥٠٦٠٥_٢٢٠٠٠٨.jpg" alt="Mohamed">
+  </div>
+
+  <div class="quiz-container">
+    <div class="question">
+      1. واش الحاجة اللي مايخبوهاش العشاق؟
+      <div class="options">
+        <label>المشاعر</label>
+        <label>الكذب</label>
+        <label>الهدايا</label>
+      </div>
     </div>
 
-    <div id="end" class="hidden">
-      <h2>مبروك يا محمد 🎉</h2>
-      <p id="scoreText"></p>
-      <p>ربي يحفظك ونبقى نحبك ديما 💙</p>
+    <div class="question">
+      2. واش يدير العاشق كي يسمع صوت محبوبو؟
+      <div class="options">
+        <label>يفرح</label>
+        <label>يبكي</label>
+        <label>يقلق</label>
+      </div>
+    </div>
+
+    <div class="question">
+      3. شكون يكون أغلى من الناس عند العاشق؟
+      <div class="options">
+        <label>أهلو</label>
+        <label>محبوبو</label>
+        <label>صاحب طفولتو</label>
+      </div>
+    </div>
+
+    <div class="question">
+      4. في الحب، القلب يهدر ولا العقل؟
+      <div class="options">
+        <label>القلب</label>
+        <label>العقل</label>
+        <label>زوج</label>
+      </div>
+    </div>
+
+    <div class="question">
+      5. كي تشوف محبوبك، وش تحس؟
+      <div class="options">
+        <label>بالراحة</label>
+        <label>بالتوتر</label>
+        <label>بالخوف</label>
+      </div>
+    </div>
+
+    <div class="question">
+      6. وش أقوى كلمة فالحب؟
+      <div class="options">
+        <label>نحبك</label>
+        <label>نشتاقلك</label>
+        <label>مانقدرش نعيش بلا بيك</label>
+      </div>
+    </div>
+
+    <div class="question">
+      7. الحب واش يبدل في الشخص؟
+      <div class="options">
+        <label>يحليه</label>
+        <label>يقلقه</label>
+        <label>يضعف ثقتو</label>
+      </div>
+    </div>
+
+    <div class="question">
+      8. كي يغيب محبوبك، وش تولي؟
+      <div class="options">
+        <label>تخمم فيه</label>
+        <label>تنسا</label>
+        <label>تخرج تتونس</label>
+      </div>
+    </div>
+
+    <div class="question">
+      9. وش الحاجة اللي تزيد الحب؟
+      <div class="options">
+        <label>الاهتمام</label>
+        <label>الغيرة</label>
+        <label>الرسائل</label>
+      </div>
+    </div>
+
+    <div class="question">
+      10. كي تعيط محبوبك، وش أول كلمة تقولها؟
+      <div class="options">
+        <label>سلام</label>
+        <label>حبي</label>
+        <label>اسم محبوبك</label>
+      </div>
+    </div>
+
+    <!-- الأسئلة من 11 إلى 20 -->
+    <div class="question">
+      11. الحب واش هو فالحقيقة؟
+      <div class="options">
+        <label>إحساس</label>
+        <label>تعلق</label>
+        <label>هوس</label>
+      </div>
+    </div>
+
+    <div class="question">
+      12. كي تكون زعفان، وش يديرلك محبوبك؟
+      <div class="options">
+        <label>يراضيك</label>
+        <label>يخليك</label>
+        <label>يزعف معاك</label>
+      </div>
+    </div>
+
+    <div class="question">
+      13. وش يجرح فالحب؟
+      <div class="options">
+        <label>الخيانة</label>
+        <label>الإهمال</label>
+        <label>النسيان</label>
+      </div>
+    </div>
+
+    <div class="question">
+      14. كي تكون وحدك، واش يدور فبالك؟
+      <div class="options">
+        <label>محبوبك</label>
+        <label>الهموم</label>
+        <label>النجاح</label>
+      </div>
+    </div>
+
+    <div class="question">
+      15. أغلى لحظة في الحب؟
+      <div class="options">
+        <label>أول اعتراف</label>
+        <label>أول نظرة</label>
+        <label>أول عناق</label>
+      </div>
+    </div>
+
+    <div class="question">
+      16. وش أحسن هدية فالحب؟
+      <div class="options">
+        <label>الكلمة الصادقة</label>
+        <label>العطر</label>
+        <label>الدبدوب</label>
+      </div>
+    </div>
+
+    <div class="question">
+      17. وش أقرب طريق للقلب؟
+      <div class="options">
+        <label>الاحترام</label>
+        <label>الجمال</label>
+        <label>الفلوس</label>
+      </div>
+    </div>
+
+    <div class="question">
+      18. وش يدير العاشق قبل ما ينعس؟
+      <div class="options">
+        <label>يتفكر محبوبو</label>
+        <label>يشوف صور</label>
+        <label>يبكي</label>
+      </div>
+    </div>
+
+    <div class="question">
+      19. الحب واش يعلمنا؟
+      <div class="options">
+        <label>الصبر</label>
+        <label>الأنانية</label>
+        <label>الغرور</label>
+      </div>
+    </div>
+
+    <div class="question">
+      20. آخر كلمة تقولها لمحبوبك؟
+      <div class="options">
+        <label>نحبك</label>
+        <label>ما تخلينيش</label>
+        <label>ديما معايا</label>
+      </div>
     </div>
   </div>
 
-  <script>
-    const questions = [
-      {
-        question: "شنو أكثر حاجة تحبها في فطومة؟",
-        options: ["ضحكتها", "عيونها", "قلبها", "كلشي"],
-        answer: "كلشي"
-      },
-      {
-        question: "وين تحب تدّي فطومة في عطلة؟",
-        options: ["تركيا", "باريس", "الجزائر العاصمة", "عنابة"],
-        answer: "باريس"
-      },
-      {
-        question: "فطومة تحب؟",
-        options: ["الشوكولا", "القهوة", "أنت", "الهدوء"],
-        answer: "أنت"
-      },
-      // زيد أسئلة أخرى حسب الحاجة
-    ];
-
-    let currentQuestion = 0;
-    let score = 0;
-
-    function startQuiz() {
-      document.querySelector("button").style.display = "none";
-      document.getElementById("quiz").classList.remove("hidden");
-      showQuestion();
-    }
-
-    function showQuestion() {
-      const q = questions[currentQuestion];
-      document.getElementById("questionText").innerText = q.question;
-
-      const optionsDiv = document.getElementById("options");
-      optionsDiv.innerHTML = "";
-
-      q.options.forEach(option => {
-        const btn = document.createElement("div");
-        btn.className = "option";
-        btn.innerText = option;
-        btn.onclick = () => checkAnswer(option);
-        optionsDiv.appendChild(btn);
-      });
-    }
-
-    function checkAnswer(answer) {
-      if (answer === questions[currentQuestion].answer) score++;
-      currentQuestion++;
-
-      if (currentQuestion < questions.length) {
-        showQuestion();
-      } else {
-        document.getElementById("quiz").classList.add("hidden");
-        document.getElementById("end").classList.remove("hidden");
-        document.getElementById("scoreText").innerText = `جاوبت صحيح على ${score} من ${questions.length} أسئلة ❤️`;
-      }
-    }
-  </script>
 </body>
 </html>
