@@ -1,274 +1,218 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <title>عيد ميلاد سعيد محمد 🎉</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #f0f8ff;
-      font-family: 'Arial', sans-serif;
-      overflow-x: hidden;
-    }
-
-    header {
-      background-color: #005f99;
-      color: white;
-      text-align: center;
-      padding: 25px 10px;
-      font-size: 2.5em;
-    }
-
-    .subheader {
-      text-align: center;
-      color: #333;
-      font-size: 1.4em;
-      margin: 15px;
-    }
-
-    .image-container {
-      display: flex;
-      justify-content: center;
-      margin: 15px 0;
-    }
-
-    .image-container img {
-      max-width: 95%;
-      height: auto;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    }
-
-    .quiz-container {
-      max-width: 900px;
-      margin: auto;
-      padding: 10px;
-    }
-
-    .question {
-      background-color: #cce7ff;
-      margin: 15px 0;
-      padding: 20px;
-      border-radius: 15px;
-      font-size: 1.3em;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .options {
-      margin-top: 10px;
-    }
-
-    .options label {
-      display: block;
-      margin: 8px 0;
-      background-color: white;
-      padding: 10px 18px;
-      border-radius: 10px;
-      border: 2px solid #007acc;
-      transition: 0.3s;
-      font-size: 1.1em;
-      cursor: pointer;
-    }
-
-    .options label:hover {
-      background-color: #e6f5ff;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>اختبار الحب - عيد ميلاد سعيد</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: radial-gradient(circle, #001f3f 0%, #000814 100%);
+    color: #00aaff;
+    margin: 0; padding: 0;
+    display: flex; justify-content: center; align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    direction: rtl;
+  }
+  .container {
+    background: #001f3fdd;
+    border-radius: 15px;
+    width: 95vw;
+    max-width: 600px;
+    padding: 20px 25px;
+    box-shadow: 0 0 25px #00aaffaa;
+    text-align: center;
+    position: relative;
+  }
+  img {
+    max-width: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    box-shadow: 0 0 15px #00aaffcc;
+  }
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: #00aaff;
+    text-shadow: 0 0 10px #00aaff;
+  }
+  #progress {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #00ccff;
+  }
+  #question {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    min-height: 60px;
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  button.option-btn {
+    background: #005f99;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 10px;
+    color: #aaffff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 0 15px #0077cc99;
+    transition: background 0.3s ease;
+  }
+  button.option-btn:hover {
+    background: #0088cc;
+  }
+  button.option-btn.correct {
+    background: #00cc44;
+    box-shadow: 0 0 20px #00ff77;
+    color: #001f0f;
+    font-weight: bold;
+  }
+  button.option-btn.wrong {
+    background: #cc0000;
+    box-shadow: 0 0 20px #ff4444;
+    color: #fff;
+    font-weight: bold;
+  }
+  #score {
+    font-size: 1.4rem;
+    color: #00ffbb;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  #final-message {
+    margin-top: 25px;
+    font-size: 1.5rem;
+    color: #00ffaa;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ffaa;
+  }
+</style>
 </head>
 <body>
-
-  <header>🎂 عيد ميلاد سعيد محمد 🎂</header>
-  <div class="subheader">
-    أحلى عيد ميلاد لأطيب قلب، ربي يدومك ليّ ويخليك ديما فرحان ❤️
+  <div class="container">
+    <img src="IMG_٢٠٢٥٠٦٠٥_٢٢٠٠٠٨.jpg" alt="محمد" />
+    <h1>اختبار الحب - عيد ميلاد سعيد محمد</h1>
+    <div id="progress"></div>
+    <div id="question"></div>
+    <div class="options"></div>
+    <div id="score"></div>
+    <div id="final-message"></div>
   </div>
 
-  <div class="image-container">
-    <img src="IMG_٢٠٢٥٠٦٠٥_٢٢٠٠٠٨.jpg" alt="Mohamed">
-  </div>
+<script>
+  const questions = [
+    "واش الحاجة اللي مايخبوهاش العشاق تتفكر؟",
+    "واش يدير العاشق كي يشوف معشوقو بعيد؟",
+    "شحال من مرة قالنا ليك 'نحبك' بصراحة؟",
+    "فين تعرفت على فطومة؟",
+    "واش هي أجمل ذكرى جمعتكم؟",
+    "كيفاش تتصرف كي تعصب عليها؟",
+    "شنو سر العلاقة الناجحة؟",
+    "كيفاش تعبر على حبك بالكلام؟",
+    "شنو اللون اللي يعبر على حبك ليها؟",
+    "واش تحب تهديها في عيد الميلاد؟",
+    "كي تكون بعيد عليها، واش تحس؟",
+    "كيفاش تحاول تصلح المشاكل بيناتكم؟",
+    "شنو أكتر حاجة تعجبك فيها؟",
+    "كيفاش تتخيل حياتكم مع بعض بعد 10 سنوات؟",
+    "واش كتفضل قعدة هادئة ولا مغامرة معاها؟",
+    "شنو أول حاجة لاحظتها فيها؟",
+    "كي تحس بالغيرة، كيفاش تتصرف؟",
+    "شنو أطرف موقف صار بيناتكم؟",
+    "واش كتصدق بالحب من أول نظرة؟",
+    "شنو أفضل نصيحة تعلمتها من علاقتكم؟"
+  ];
 
-  <div class="quiz-container">
-    <div class="question">
-      1. واش الحاجة اللي مايخبوهاش العشاق؟
-      <div class="options">
-        <label>المشاعر</label>
-        <label>الكذب</label>
-        <label>الهدايا</label>
-      </div>
-    </div>
+  const answers = [
+    "الذكرى والحب الصادق",
+    "يحاول يقرب ويعاود الاتصال",
+    "مرة كثيرة ومش دايما بكلام",
+    "في حفلة الأصدقاء",
+    "الضحك والمغامرات اللي عشناها",
+    "يحاول يهدأ ويتفاهم معاها",
+    "الثقة والصراحة",
+    "بالحكي والكلمات الجميلة",
+    "الأحمر اللي يعبر على الشغف",
+    "هدية من القلب",
+    "يوجع القلب ويزيد الاشتياق",
+    "بالصبر والكلام الهادئ",
+    "ابتسامتها وروحها الطيبة",
+    "عايشين حياة سعيدة ومستقرة",
+    "القعدة الهادئة تجمعكم أكتر",
+    "ابتسامتها الأولى",
+    "يحاول يسيطر على غيرته",
+    "موقف مضحك وسط الأصدقاء",
+    "نعم أكيد",
+    "الصبر والتفاهم"
+  ];
 
-    <div class="question">
-      2. واش يدير العاشق كي يسمع صوت محبوبو؟
-      <div class="options">
-        <label>يفرح</label>
-        <label>يبكي</label>
-        <label>يقلق</label>
-      </div>
-    </div>
+  let current = 0;
+  let score = 0;
 
-    <div class="question">
-      3. شكون يكون أغلى من الناس عند العاشق؟
-      <div class="options">
-        <label>أهلو</label>
-        <label>محبوبو</label>
-        <label>صاحب طفولتو</label>
-      </div>
-    </div>
+  const progressEl = document.getElementById('progress');
+  const questionEl = document.getElementById('question');
+  const optionsEl = document.querySelector('.options');
+  const scoreEl = document.getElementById('score');
+  const finalMessageEl = document.getElementById('final-message');
 
-    <div class="question">
-      4. في الحب، القلب يهدر ولا العقل؟
-      <div class="options">
-        <label>القلب</label>
-        <label>العقل</label>
-        <label>زوج</label>
-      </div>
-    </div>
+  function showQuestion() {
+    progressEl.textContent = `السؤال ${current + 1} من ${questions.length}`;
+    questionEl.textContent = questions[current];
+    optionsEl.innerHTML = '';
 
-    <div class="question">
-      5. كي تشوف محبوبك، وش تحس؟
-      <div class="options">
-        <label>بالراحة</label>
-        <label>بالتوتر</label>
-        <label>بالخوف</label>
-      </div>
-    </div>
+    const btn = document.createElement('button');
+    btn.textContent = 'عرض الإجابة الصحيحة';
+    btn.classList.add('option-btn');
+    btn.onclick = () => {
+      showAnswer();
+    };
+    optionsEl.appendChild(btn);
+  }
 
-    <div class="question">
-      6. وش أقوى كلمة فالحب؟
-      <div class="options">
-        <label>نحبك</label>
-        <label>نشتاقلك</label>
-        <label>مانقدرش نعيش بلا بيك</label>
-      </div>
-    </div>
+  function showAnswer() {
+    optionsEl.innerHTML = '';
+    const correctBtn = document.createElement('button');
+    correctBtn.textContent = `الإجابة: ${answers[current]}`;
+    correctBtn.classList.add('option-btn', 'correct');
+    optionsEl.appendChild(correctBtn);
 
-    <div class="question">
-      7. الحب واش يبدل في الشخص؟
-      <div class="options">
-        <label>يحليه</label>
-        <label>يقلقه</label>
-        <label>يضعف ثقتو</label>
-      </div>
-    </div>
+    // زيادة العلامة هنا، لأن كل إجابة صحيحة محسوبة (لأنها ثابتة)
+    score++;
 
-    <div class="question">
-      8. كي يغيب محبوبك، وش تولي؟
-      <div class="options">
-        <label>تخمم فيه</label>
-        <label>تنسا</label>
-        <label>تخرج تتونس</label>
-      </div>
-    </div>
+    const nextBtn = document.createElement('button');
+    nextBtn.textContent = current < questions.length - 1 ? 'السؤال التالي' : 'انهاء الاختبار';
+    nextBtn.classList.add('option-btn');
+    nextBtn.onclick = () => {
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+        scoreEl.textContent = `النتيجة الحالية: ${score} / ${questions.length}`;
+        finalMessageEl.textContent = '';
+      } else {
+        showFinal();
+      }
+    };
+    optionsEl.appendChild(nextBtn);
+  }
 
-    <div class="question">
-      9. وش الحاجة اللي تزيد الحب؟
-      <div class="options">
-        <label>الاهتمام</label>
-        <label>الغيرة</label>
-        <label>الرسائل</label>
-      </div>
-    </div>
+  function showFinal() {
+    questionEl.textContent = '';
+    progressEl.textContent = '';
+    optionsEl.innerHTML = '';
+    scoreEl.textContent = `النتيجة النهائية: ${score} من ${questions.length}`;
+    finalMessageEl.innerHTML = `
+      ❤ <strong>تربح ديما يا محمد، لأنك ربحت قلب فطومة</strong> ❤<br/>
+      🎉 <strong>عيد ميلاد سعيد وربي يدوم محبتنا</strong> 🎉
+    `;
+  }
 
-    <div class="question">
-      10. كي تعيط محبوبك، وش أول كلمة تقولها؟
-      <div class="options">
-        <label>سلام</label>
-        <label>حبي</label>
-        <label>اسم محبوبك</label>
-      </div>
-    </div>
-
-    <!-- الأسئلة من 11 إلى 20 -->
-    <div class="question">
-      11. الحب واش هو فالحقيقة؟
-      <div class="options">
-        <label>إحساس</label>
-        <label>تعلق</label>
-        <label>هوس</label>
-      </div>
-    </div>
-
-    <div class="question">
-      12. كي تكون زعفان، وش يديرلك محبوبك؟
-      <div class="options">
-        <label>يراضيك</label>
-        <label>يخليك</label>
-        <label>يزعف معاك</label>
-      </div>
-    </div>
-
-    <div class="question">
-      13. وش يجرح فالحب؟
-      <div class="options">
-        <label>الخيانة</label>
-        <label>الإهمال</label>
-        <label>النسيان</label>
-      </div>
-    </div>
-
-    <div class="question">
-      14. كي تكون وحدك، واش يدور فبالك؟
-      <div class="options">
-        <label>محبوبك</label>
-        <label>الهموم</label>
-        <label>النجاح</label>
-      </div>
-    </div>
-
-    <div class="question">
-      15. أغلى لحظة في الحب؟
-      <div class="options">
-        <label>أول اعتراف</label>
-        <label>أول نظرة</label>
-        <label>أول عناق</label>
-      </div>
-    </div>
-
-    <div class="question">
-      16. وش أحسن هدية فالحب؟
-      <div class="options">
-        <label>الكلمة الصادقة</label>
-        <label>العطر</label>
-        <label>الدبدوب</label>
-      </div>
-    </div>
-
-    <div class="question">
-      17. وش أقرب طريق للقلب؟
-      <div class="options">
-        <label>الاحترام</label>
-        <label>الجمال</label>
-        <label>الفلوس</label>
-      </div>
-    </div>
-
-    <div class="question">
-      18. وش يدير العاشق قبل ما ينعس؟
-      <div class="options">
-        <label>يتفكر محبوبو</label>
-        <label>يشوف صور</label>
-        <label>يبكي</label>
-      </div>
-    </div>
-
-    <div class="question">
-      19. الحب واش يعلمنا؟
-      <div class="options">
-        <label>الصبر</label>
-        <label>الأنانية</label>
-        <label>الغرور</label>
-      </div>
-    </div>
-
-    <div class="question">
-      20. آخر كلمة تقولها لمحبوبك؟
-      <div class="options">
-        <label>نحبك</label>
-        <label>ما تخلينيش</label>
-        <label>ديما معايا</label>
-      </div>
-    </div>
-  </div>
-
+  showQuestion();
+</script>
 </body>
 </html>
